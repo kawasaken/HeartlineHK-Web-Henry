@@ -379,7 +379,7 @@ const Chatroom = (props) =>{
             {(isCallLoading || isChatLoading) && <Loading></Loading>}
             {callCurrrntClient === null && 
                 <div className="chat-container">
-                    {disconnectedAt !== null &&
+                    {disconnectedAt && !isNaN(disconnectedAt) &&
                         <p className="disconnect-msg">使用者已於{getFormattedDateString(disconnectedAt)}開始離線。</p>
                     }
                     <div ref={messageContainerDiv} className="messages-container">
