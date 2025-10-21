@@ -7,6 +7,7 @@ import { getAuth } from "firebase/auth";
 import { getDatabase, ref } from "firebase/database";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useObjectVal } from "react-firebase-hooks/database";
+import { useChat } from "../hooks/useChat.js"; 
 
 const NavBar = (props) =>{
 
@@ -18,6 +19,15 @@ const NavBar = (props) =>{
 
     const menuNav = useRef();
     const navBackgroundDiv = useRef();
+
+    // Get chat queue from hook
+    const [chatQueue] = useChat(currentUser);
+
+    // Count only unassigned chat clients
+    const unassignedQueueLength = useMemo(() => {
+        if (!chatQueue) return 0;
+        return chatQueue.filter(client => client.val()['status'] !== 'roomAssigned').length;
+    }, [chatQueue]);
 
     const isSupervisor = useMemo(() => {
         if (currentUser && supervisors){
@@ -70,7 +80,12 @@ const NavBar = (props) =>{
                 </li>
                 <li className="nav-item">
                     <Link to="/chatroom" className="nav-link" onClick={closeNav}>
+                    <span className = "chatroom-with-dot">
                         <span className="material-icons">chat</span> 聊天室
+                        {unassignedQueueLength > 0 && (
+                            <span className="queue-dot"></span> // small red dot
+                        )}
+                    </span>
                     </Link>
                 </li>
                 <li className="nav-item">
