@@ -8,7 +8,7 @@ import { getDatabase, ref } from "firebase/database";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useObjectVal } from "react-firebase-hooks/database";
 import { useChat } from "../hooks/useChat.js"; 
-import notificationSound from "../sound/new_user.mp3";
+
 
 const NavBar = (props) =>{
 
@@ -17,6 +17,7 @@ const NavBar = (props) =>{
     const [currentUser] = useAuthState(firebaseAuth);
     const [supervisors] = useObjectVal(ref(firebaseDB, 'supervisors'));
     const [preferredNames] = useObjectVal(ref(firebaseDB, 'preferred_names'));
+    const notificationSound = process.env.PUBLIC_URL + "/sound/new_user.mp3";
 
     const menuNav = useRef();
     const navBackgroundDiv = useRef();
