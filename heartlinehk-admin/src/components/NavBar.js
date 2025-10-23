@@ -1,4 +1,4 @@
-import { useRef, useMemo } from "react";
+import { useRef, useMemo, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Avatar } from '@mui/material';
 import logo from "../img/logo/logo_80x80.png";
@@ -8,6 +8,7 @@ import { getDatabase, ref } from "firebase/database";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useObjectVal } from "react-firebase-hooks/database";
 import { useChat } from "../hooks/useChat.js"; 
+import notificationSound from "../sound/new_user.mp3";
 
 const NavBar = (props) =>{
 
@@ -28,6 +29,22 @@ const NavBar = (props) =>{
         if (!chatQueue) return 0;
         return chatQueue.filter(client => client.val()['status'] !== 'roomAssigned').length;
     }, [chatQueue]);
+
+    //store previous queue length to detect increases
+    const prevQueueLength = useRef(0);
+
+    useEffect(() => {
+    // Only play sound if the queue length *increases* (a new user arrived)
+    if (unassignedQueueLength > prevQueueLength.current) {
+        const audio = new Audio(notificationSound);
+        audio.play().catch((err) => {
+        console.warn("Audio play blocked until user interacts with the page:", err);
+        });
+    }
+
+    // Update stored value
+    prevQueueLength.current = unassignedQueueLength;
+    }, [unassignedQueueLength]); // triggers whenever queue length changes
 
     const isSupervisor = useMemo(() => {
         if (currentUser && supervisors){
