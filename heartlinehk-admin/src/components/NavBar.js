@@ -106,11 +106,11 @@ const NavBar = (props) =>{
                     </span>
                     </Link>
                 </li>
-                <li className="nav-item">
+{/*                 <li className="nav-item">
                     <Link to="/profile-update" className="nav-link" onClick={closeNav}>
                         <span className="material-icons">badge</span> 更改個人資料
                     </Link>
-                </li>
+                </li> */}
                 {isSupervisor && 
                 <li className="nav-item">
                     <Link to="/supervisor" className="nav-link" onClick={closeNav}>

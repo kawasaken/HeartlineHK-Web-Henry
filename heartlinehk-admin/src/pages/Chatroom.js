@@ -15,7 +15,7 @@ import { REQUEST_STATUS, useChat } from "../hooks/useChat.js";
 const Chatroom = (props) =>{
 
     const stockPhrases = {
-        'opening': "你好，我哋係Heartline HK，你可以叫我XXX。今晚上到嚟係咪有嘢想同我哋傾吓？",
+        'opening': "你好，我哋係Heartline HK。今晚上到嚟係咪有嘢想同我哋傾吓？",
         'ending': "多謝你信任我哋搵我哋傾偈呀，歡迎您日後有需要嘅時候再次搵我哋！喺您閂咗個對話視窗之後系統會自動彈一份問卷畀你，麻煩你幫手答幾條問題，話俾我哋知有咩要改善嘅地方！再見～"
     };
     const specialChineseChars = ['啲','咁','嗰','咗','喺','係','哋','唔','咩','咪','嘅','㗎','喎','嘢','嚟','囉','乜','叻','呢','啱','睇','諗','噏','嘥','晒','咋','瞓','唞','氹','攰','俾','閂','呀','啦','冧','晏','嬲','喇'];
@@ -262,7 +262,7 @@ const Chatroom = (props) =>{
     }
 
     useEffect(()=>{
-        const callNoti = document.querySelector('#call-noti-toggle').checked;
+/*         const callNoti = document.querySelector('#call-noti-toggle').checked; */
         const chatNoti = document.querySelector('#chat-noti-toggle').checked;
         const notiPermission = ('Notification' in window && Notification.permission === 'granted');
         let newCallNoti = false;
@@ -275,7 +275,7 @@ const Chatroom = (props) =>{
         
         while (callIdx < callQueue.length || chatIdx < chatQueue.length){
             if (chatIdx >= chatQueue.length || (callIdx < callQueue && callQueue[callIdx]['key']['time'] < chatQueue[chatIdx].val()['time'])){
-                if (notiPermission && callNoti && !newCallNoti){
+                if (notiPermission /* && callNoti */ && !newCallNoti){
                     let isUserExist = false;
                     for (let i=0; i<uniQueue.length; i++) if (uniQueue[i].userId === callQueue[callIdx]['key']){
                         isUserExist = true;
@@ -444,11 +444,11 @@ const Chatroom = (props) =>{
                     })}
                 </div>
                 <div className="buttons-container">
-                    <label htmlFor="call-noti-toggle" className="toggle-switch">
+{/*                     <label htmlFor="call-noti-toggle" className="toggle-switch">
                         <input type="checkbox" name="call-noti-toggle" id="call-noti-toggle" onClick={requestNotificationPermission}/>
                         <span className="slider"></span>
                         新語音通知
-                    </label>
+                    </label> */}
                     <label htmlFor="chat-noti-toggle" className="toggle-switch">
                         <input type="checkbox" name="chat-noti-toggle" id="chat-noti-toggle" onClick={requestNotificationPermission}/>
                         <span className="slider"></span>
@@ -456,7 +456,7 @@ const Chatroom = (props) =>{
                     </label>
                     <button type="submit" name="trasnsfer-btn" id="transfer-btn" disabled={chatCurrentClient === null || chatAssignedStatus === ASSIGNED_STATUS.CLIENT_LEFT || transferrableVolun.length <= 0}  onClick={openTransferChatModal}>轉移對話</button>
                     <button type="submit" name="start-btn" id="start-btn" disabled={chatCurrentClient !== null || callCurrrntClient !== null || chatQueue.length <= 0 } onClick={()=>{document.getElementById("startchat-modal").classList.add("opened")}}>開始文字對話</button>
-                    <button type="submit" name="start-call-btn" id="start-call-btn" disabled={chatCurrentClient !== null || callCurrrntClient !== null || callQueue.length <= 0} onClick={()=>{document.getElementById("startcall-modal").classList.add("opened")}}>開始語音對話</button>
+{/*                     <button type="submit" name="start-call-btn" id="start-call-btn" disabled={chatCurrentClient !== null || callCurrrntClient !== null || callQueue.length <= 0} onClick={()=>{document.getElementById("startcall-modal").classList.add("opened")}}>開始語音對話</button> */}
                     <button type="submit" name="end-btn" id="end-btn" disabled={chatCurrentClient == null && callCurrrntClient == null} onClick={()=>{document.getElementById("endchat-modal").classList.add("opened")}}>結束對話</button>
                 </div>
             </div>
