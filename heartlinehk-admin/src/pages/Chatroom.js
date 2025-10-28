@@ -204,10 +204,10 @@ const Chatroom = (props) =>{
         const preferredNameSnapshot = await get(child(preferredNameRef, props.currentUser.uid));
         const preferredName = (preferredNameSnapshot.exists?preferredNameSnapshot.val():null);
         const msgInput = document.querySelector(".chatroom .chat-container .input-container #msg-input");
-        if (e.target.value === 'opening' && preferredName){
+/*         if (e.target.value === 'opening' && preferredName){
             const namePos = stockPhrase.indexOf('XXX');
             stockPhrase = stockPhrases[e.target.value].substring(0, namePos) + preferredName['preferredName'] + stockPhrases[e.target.value].substring(namePos+3, stockPhrases[e.target.value].length);
-        }
+        } */
         msgInput.value = stockPhrase;
         msgInput.focus()
         msgInput.setSelectionRange(stockPhrase.length+1, stockPhrase.length+1);
