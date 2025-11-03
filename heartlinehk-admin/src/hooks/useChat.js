@@ -185,6 +185,13 @@ export function useChat(currentUser){
                     'spc': targetClient
                 });
 
+                // Send the System disclaimer message
+                await push(ref(firebaseDB, `chat_log/${currentUser.uid}`), {
+                    'uid': currentUser.uid,
+                    'time': serverTimestamp(),
+                    'msg': "【系統訊息】HeartlineHK 主要提供聆聽服務，而非危機干預或專業諮詢。如你選擇繼續對話，表示你已經得悉以上資訊。"
+                });
+
                 dispatch({type: REDUCER_ACTIONS.UPDATE_IS_STARTING_CHAT, payload: {starting: false}});
             }
         }catch(error){
