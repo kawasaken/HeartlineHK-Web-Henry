@@ -6,4 +6,4 @@ set NODE_OPTIONS=--openssl-legacy-provider
 
 Deploy to firebase:
 npm run build
-firebase deploy --only hosting
+firebase deploy --only hosting:admin
