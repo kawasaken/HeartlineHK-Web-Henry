@@ -62,7 +62,7 @@ const SupportUs = (props) => {
         <div className="support-us">
             <div className="main-text">
                 <h1>支持我們</h1>
-                <p>HeartlineHK是一個非牟利的慈善團體，需要社會各界人士的支持，以維持及發展服務。我們誠邀你支持本會的工作，讓更多受情緒困擾的年輕人得到適切的幫助。</p>
+                <p>HeartlineHK 是一個非牟利的慈善團體，我們誠邀社會各界人士支持本會的工作，讓更多受情緒困擾的年輕人得到適切的幫助！</p>
             </div>
             <ul className="support-methods-container">
                 <li className="support-method">
