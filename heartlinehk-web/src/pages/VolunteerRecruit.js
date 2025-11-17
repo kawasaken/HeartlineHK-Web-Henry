@@ -48,7 +48,7 @@ const VolunteerRecruit = () =>{
         <div className="volunteer-recruit">
             <div className="main-text">
                 <h1>義工招募</h1>
-                <p>HeartlineHK希望透過培訓有心人成為義工，為年輕人提供一班願意聆聽他們心聲的朋輩，藉以舒緩他們生活裡難以宣洩的壓力與不安。成為我們的義工，為朋輩的心理健康出一分力吧！</p>
+                <p>義工是 HeartlineHK 聆聽服務最珍貴的核心資源，我們希望培訓有心人成為值得信賴的傾訴對象，以同行者的角色傾聽年輕人心聲，為改善年輕人情緒健康出一分力！</p>
             </div>
             <div className="apply-deadline-container">
                 <h1>最新一輪簡介會</h1>
