@@ -10,3 +10,6 @@ npm run build
 
 ../ back then
 firebase deploy --only hosting:admin
+
+start firebase emulators
+firebase emulators:start --only auth,database,hosting
